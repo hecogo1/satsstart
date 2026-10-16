@@ -26,7 +26,7 @@ Every outbound service link is an ordinary official link, with no tracking. The 
 `window.FEES_LAST_CHECKED` is shown on the fee calculator and disclaimer pages. Update it whenever you re-verify fees.
 
 ## Fee sources (checked 16 Oct 2026)
-- Revolut X: 0% maker / 0.09% taker; withdrawal = £3 service fee + network fee. https://www.revolut.com/legal/crypto-exchange-fees/
+- Revolut X: 0% maker / 0.09% taker; withdrawal = about £3 (roughly €3.50) plus the network fee, ~7% on €50. https://www.revolut.com/legal/crypto-exchange-fees/
 - Kraken Pro entry tier: 0.40% / 0.80%. https://www.kraken.com/features/fee-schedule
 - Coinbase Advanced entry tier (from 16 Sep 2026): EU/UK 0.25% / 0.50%, US 0.50% / 0.90%. https://www.coinbase.com/blog/were-lowering-fees-for-many-active-traders-on-coinbase-advanced and https://www.coinbase.com/advanced-vip
 - Revolut app (EEA, Standard/Plus): greater of a minimum fee (EUR 0.99-2.99 under EUR 200) or 1.49%, plus one-sided added spread "typically 0-3%". https://www.revolut.com/en-SK/legal/exchangingcryptocurrenciespersonalfees/ and https://www.revolut.com/legal/crypto-tiered-pricing/
