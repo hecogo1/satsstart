@@ -3,7 +3,7 @@
 // Newsletter signup endpoint. Leave "" until you have one.
 // Buttondown example: "https://buttondown.com/api/emails/embed-subscribe/YOUR-USERNAME"
 // The form POSTs one field named "email" to this URL.
-window.NEWSLETTER_ENDPOINT = "";
+window.NEWSLETTER_ENDPOINT = "https://buttondown.com/api/emails/embed-subscribe/hecogo";
 
 // Date the fee figures were last checked against each platform's official fee page.
 window.FEES_LAST_CHECKED = "16 October 2026";
