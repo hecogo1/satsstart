@@ -2,7 +2,7 @@
 
 Static site (plain HTML/CSS/JS, no build step, no backend) teaching "finances first, then a little Bitcoin". Educational only.
 
-Pages: `index.html` (newsletter), `finances-first.html` (checklist, saved in localStorage), `revolut-x-fees.html` (fee calculator), `sats-calculator.html`, `disclaimer.html`.
+Pages: `index.html` (newsletter), `finances-first.html` (checklist, saved in localStorage), `revolut-x-fees.html` (fee calculator), `sats-calculator.html`, `wallets.html` (wallet explainer), `disclaimer.html`.
 
 All paths are relative, so it works from a sub-path such as `https://<user>.github.io/satsstart/` and locally. To preview: `python3 -m http.server` in this folder.
 
@@ -20,7 +20,7 @@ window.NEWSLETTER_ENDPOINT = "https://buttondown.com/api/emails/embed-subscribe/
 Notes: the request uses `fetch` with `mode: "no-cors"`, so the browser cannot read the provider's response; any delivered request shows the "Thanks, check your inbox" message (Buttondown then emails a confirmation link). Only network failures show an error. Test once with a real address after setting it. Providers needing other field names or a JSON body need a small change in the script at the bottom of `index.html`.
 
 ### 2. Affiliate links
-Every outbound service link is an ordinary official link, with no tracking. The URLs live in `window.LINKS` in `config.js` (`revolut`, `revolutx`, `bitbox`, `trezor`, `traderepublic`). Links in the HTML carry `data-link="<key>"` and are filled from that object, so to switch to affiliate links, replace the URL there. Currently used on `revolut-x-fees.html` and `disclaimer.html`. Once a link is an affiliate link, add `rel="sponsored noopener"` to those anchors and update the wording in `disclaimer.html` (and the footer "may be affiliate links").
+Every outbound service link is an ordinary official link, with no tracking. The URLs live in `window.LINKS` in `config.js` (`revolut`, `revolutx`, `bitbox`, `trezor`, `tangem`, `traderepublic`). Links in the HTML carry `data-link="<key>"` and are filled from that object, so to switch to affiliate links, replace the URL there. Currently used on `revolut-x-fees.html` and `wallets.html` (wallet explainer), `disclaimer.html`. Once a link is an affiliate link, add `rel="sponsored noopener"` to those anchors and update the wording in `disclaimer.html` (and the footer "may be affiliate links").
 
 ### 3. Fee "last checked" date
 `window.FEES_LAST_CHECKED` is shown on the fee calculator and disclaimer pages. Update it whenever you re-verify fees.

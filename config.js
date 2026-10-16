@@ -8,13 +8,14 @@ window.NEWSLETTER_ENDPOINT = "https://buttondown.com/api/emails/embed-subscribe/
 // Date the fee figures were last checked against each platform's official fee page.
 window.FEES_LAST_CHECKED = "16 October 2026";
 
-// Outbound links. Currently plain official (non-affiliate) links.
+// Outbound links. Plain official links, except tangem (referral link).
 // Replace a value with your affiliate/referral URL once approved.
 window.LINKS = {
   revolut: "https://www.revolut.com/",
   revolutx: "https://www.revolut.com/revolut-x/",
   bitbox: "https://bitbox.swiss/",
   trezor: "https://trezor.io/",
+  tangem: "https://tangem.com/invite/4YEDCC",
   traderepublic: "https://traderepublic.com/"
 };
 
