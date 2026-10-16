@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitcoin for normal people · SatsStart</title><meta name="description" content="Fix your finances first, then stack small amounts of Bitcoin. Educational tools for people in Spain and Europe."><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><nav><a class="logo" href="index.html">Sats<span>Start</span></a>
+<a href="finances-first.html" >Finances first</a>
+<a href="revolut-x-fees.html" >Fee calculator</a>
+<a href="sats-calculator.html" >Sats calculator</a>
+<a href="disclaimer.html" >Disclaimer</a></nav></header>
+<main>
+<h1>Fix your finances first. Then stack a little Bitcoin.</h1>
+<p>SatsStart helps normal people in Spain and Europe build a solid money base, then start saving small amounts in Bitcoin, with low risk and low fees. No hype, no price predictions.</p>
+<p><a class="btn" href="finances-first.html">Start with step 1</a></p>
+<div class="grid">
+<div class="card"><h3>1. Finances first</h3><p>Emergency fund, high-interest debt, a simple budget. Boring, and it works.</p><a href="finances-first.html">Open checklist →</a></div>
+<div class="card"><h3>2. Know the costs</h3><p>Compare Revolut X, Kraken Pro, Coinbase Advanced and the Revolut app.</p><a href="revolut-x-fees.html">Fee calculator →</a></div>
+<div class="card"><h3>3. Stack small</h3><p>See what €10, €25 or €50 a month could add up to in sats.</p><a href="sats-calculator.html">Sats calculator →</a></div></div>
+<h2>Weekly newsletter</h2>
+<div class="card"><p>One money habit and one Bitcoin basic, every week. Free.</p>
+<form id="nl" novalidate>
+<label for="em">Email</label><input id="em" type="email" name="email" required placeholder="you@example.com" autocomplete="email"><p><button class="btn" type="submit">Subscribe</button></p><p class="msg note" id="nlmsg" role="status" aria-live="polite"></p></form></div>
+<p class="note">Educational only, not financial advice. Bitcoin is volatile.</p>
+</main>
+<footer>Educational content only, not financial advice. Bitcoin is volatile and you can lose money. Some links may be affiliate links; see the <a href="disclaimer.html">disclaimer</a>. © 2026 SatsStart</footer>
+
+<script>
+document.getElementById("nl").addEventListener("submit",function(ev){
+  ev.preventDefault();
+  var msg=document.getElementById("nlmsg"),em=document.getElementById("em"),btn=this.querySelector("button");
+  var ep=(window.NEWSLETTER_ENDPOINT||"").trim();
+  if(!ep){msg.textContent="Newsletter signup isn't open yet. Please check back soon.";return;}
+  if(!em.value||!em.checkValidity()){msg.textContent="Please enter a valid email address.";return;}
+  btn.disabled=true;msg.textContent="Subscribing…";
+  var body=new URLSearchParams();body.append("email",em.value);
+  // no-cors: provider forms don't send CORS headers, so the response is opaque.
+  // A resolved request means it was delivered; a network error rejects.
+  fetch(ep,{method:"POST",mode:"no-cors",body:body}).then(function(){
+    msg.textContent="Thanks! Check your inbox to confirm your subscription.";em.value="";
+  }).catch(function(){
+    msg.textContent="Something went wrong. Please try again later.";
+  }).then(function(){btn.disabled=false;});
+});
+</script>
+</body></html>

@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revolut X fee calculator · SatsStart</title><meta name="description" content="Fix your finances first, then stack small amounts of Bitcoin. Educational tools for people in Spain and Europe."><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><nav><a class="logo" href="index.html">Sats<span>Start</span></a>
+<a href="finances-first.html" >Finances first</a>
+<a href="revolut-x-fees.html" class="on">Fee calculator</a>
+<a href="sats-calculator.html" >Sats calculator</a>
+<a href="disclaimer.html" >Disclaimer</a></nav></header>
+<main>
+<h1>Revolut X fee calculator</h1><p>See what a Bitcoin buy costs on different platforms, and why withdrawals matter. Fees last checked: <b data-checked></b>.</p>
+<div class="card"><label for="amt">Buy amount (€)</label><input id="amt" type="number" min="1" value="50">
+<label for="sp">Revolut app added spread (%, Revolut says typically 0–3; 1.5 is just an example)</label><input id="sp" type="number" min="0" max="3" step="0.1" value="1.5">
+<label for="ord">Order type on exchanges</label><select id="ord" style="width:100%;padding:.6rem;font-size:1rem"><option value="m">Maker (limit order)</option><option value="t" selected>Taker (market order)</option></select></div>
+<div class="tblwrap"><table><thead><tr><th>Platform</th><th>Fee rate</th><th>Cost</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="card"><h3>Withdrawing BTC to your own wallet</h3><p>Revolut charges a service fee of £3 (or the local-currency equivalent, roughly €3.50) for Bitcoin, plus the blockchain network fee, per withdrawal. The app shows the exact total before you confirm.</p>
+<label for="nf">Network fee estimate (€)</label><input id="nf" type="number" min="0" step="0.1" value="1"><p id="wd"></p></div>
+<div class="warn">Tip: withdraw rarely. Buy small amounts regularly, and withdraw when you've saved up enough that the fixed fee is a small share.</div>
+<p class="note">Figures come from each platform's own official fee page and can change. Last checked <span data-checked></span>. Check current fees in the platform before you trade.</p>
+<ul class="note">
+<li><b>Revolut X:</b> 0% maker / 0.09% taker, same at any volume (<a href="https://www.revolut.com/legal/crypto-exchange-fees/" rel="noopener">Revolut X fees</a>).</li>
+<li><b>Kraken Pro:</b> entry tier (under $2,500 30-day volume) 0.40% maker / 0.80% taker (<a href="https://www.kraken.com/features/fee-schedule" rel="noopener">Kraken fee schedule</a>).</li>
+<li><b>Coinbase Advanced:</b> entry tier for EU/UK 0.25% maker / 0.50% taker, per Coinbase's September 2026 announcement. The US entry tier is 0.50% / 0.90% (<a href="https://www.coinbase.com/blog/were-lowering-fees-for-many-active-traders-on-coinbase-advanced" rel="noopener">Coinbase announcement</a>). Your region and tier may differ.</li>
+<li><b>Revolut app (Standard/Plus plan, EEA):</b> the greater of a minimum fee (€0.99–€2.99 for trades under €200) or 1.49%, <i>plus</i> a one-sided added spread that Revolut says typically ranges 0–3%. Paid plans pay less (<a href="https://www.revolut.com/en-SK/legal/exchangingcryptocurrenciespersonalfees/" rel="noopener">Revolut crypto fees</a>). Plans also have a monthly exchange limit above which an extra fee applies. Not modelled here.</li>
+<li>Exchange rows exclude bank/card deposit costs and the market bid/ask spread.</li>
+</ul>
+<p>Open a Revolut account: <a data-link="revolut" href="https://www.revolut.com/" rel="noopener">Revolut</a></p>
+</main>
+<footer>Educational content only, not financial advice. Bitcoin is volatile and you can lose money. Some links may be affiliate links; see the <a href="disclaimer.html">disclaimer</a>. © 2026 SatsStart</footer>
+<script>
+const P=[["Revolut X",0,0.09],["Kraken Pro",0.40,0.80],["Coinbase Advanced (EU/UK)",0.25,0.50]];
+const e=n=>"€"+(Math.round(n*100+1e-6)/100).toFixed(2);
+const $=id=>document.getElementById(id);
+const WD_SERVICE_EUR=3.5; // £3 service fee, approximate EUR equivalent
+// Revolut app Standard/Plus (EUR): minimum fee by trade size, else 1.49%
+function revFee(a){
+  if(a<=0)return 0;
+  if(a<2)return a*0.5;
+  if(a<5)return 0.99;
+  if(a<25)return 1.49;
+  if(a<100)return 1.99;
+  if(a<150)return 2.49;
+  if(a<200)return 2.99;
+  return a*0.0149;
+}
+function u(){
+  const a=Math.max(0,+$("amt").value||0),t=$("ord").value=="t";
+  const spread=Math.min(3,Math.max(0,+$("sp").value||0));
+  const R=P.map(p=>[p[0],(t?p[2]:p[1])+"%",a*(t?p[2]:p[1])/100]);
+  const rf=revFee(a),rs=a*spread/100;
+  R.push(["Revolut app (Standard plan)","fee "+e(rf)+" + spread "+spread+"%",rf+rs]);
+  R.sort((x,y)=>x[2]-y[2]);
+  $("rows").innerHTML=R.map((x,i)=>`<tr class="${i==0?"best":""}"><td>${x[0]}</td><td>${x[1]}</td><td>${e(x[2])}</td></tr>`).join("");
+  const w=WD_SERVICE_EUR+(Math.max(0,+$("nf").value)||0);
+  $("wd").innerHTML=`Withdrawal cost ≈ <b>${e(w)}</b>${a>0?` = <b>${(w/a*100).toFixed(1)}%</b> of a ${e(a)} purchase`:""}.`;
+}
+["amt","sp","ord","nf"].forEach(x=>{$(x).addEventListener("input",u);$(x).addEventListener("change",u)});u();
+</script>
+</body></html>

@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Finances first · SatsStart</title><meta name="description" content="Fix your finances first, then stack small amounts of Bitcoin. Educational tools for people in Spain and Europe."><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><nav><a class="logo" href="index.html">Sats<span>Start</span></a>
+<a href="finances-first.html" class="on">Finances first</a>
+<a href="revolut-x-fees.html" >Fee calculator</a>
+<a href="sats-calculator.html" >Sats calculator</a>
+<a href="disclaimer.html" >Disclaimer</a></nav></header>
+<main>
+<h1>Finances first</h1><p>Work through these in order. Bitcoin comes last, once the basics are covered. Your progress is saved in your browser only.</p>
+<div class="bar"><div id="b"></div></div><p class="note" id="pt"></p><div id="list"></div>
+<p><button class="btn" id="reset" style="background:#ddd">Reset</button></p>
+<p class="note">General education, not personal advice. Your situation may differ.</p>
+</main>
+<footer>Educational content only, not financial advice. Bitcoin is volatile and you can lose money. Some links may be affiliate links; see the <a href="disclaimer.html">disclaimer</a>. © 2026 SatsStart</footer>
+<script>const steps=[
+["Track your income and expenses for one month","Know where money goes. A simple spreadsheet or notes app is enough."],
+["Build a starter emergency fund (about €1,000)","A small buffer so surprises don't become debt."],
+["Clear high-interest debt","Credit cards and revolving credit often cost 15–25%+ APR, which is hard for any investment to beat reliably."],
+["Grow the emergency fund to 3–6 months of expenses","Keep it somewhere safe and accessible, like a savings account."],
+["Set up a simple monthly budget (50/30/20 is a start)","Decide in advance what you can save each month."],
+["Only now: choose a small, fixed monthly Bitcoin amount","Money you won't need for years and could afford to see fall a lot. Start with €10–€50."]];
+const K="satsstart_steps";let s=[];try{s=JSON.parse(localStorage.getItem(K)||"[]");if(!Array.isArray(s))s=[]}catch(e){s=[]}
+function r(){const l=document.getElementById("list");l.innerHTML="";steps.forEach((t,i)=>{const d=document.createElement("div");d.className="card step";
+d.innerHTML=`<input type="checkbox" id="c${i}" ${s[i]?"checked":""}><label for="c${i}" style="margin:0"><b>${i+1}. ${t[0]}</b><br><span class="note" style="font-weight:400">${t[1]}</span></label>`;
+d.querySelector("input").onchange=e=>{s[i]=e.target.checked;try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}r()};l.appendChild(d)});
+const n=steps.filter((_,i)=>s[i]).length;document.getElementById("b").style.width=n/steps.length*100+"%";document.getElementById("pt").textContent=n+" of "+steps.length+" done"+(n==steps.length?". Ready to look at the fee calculator.":"")}
+document.getElementById("reset").onclick=()=>{s=[];try{localStorage.removeItem(K)}catch(e){}r()};r();</script>
+</body></html>

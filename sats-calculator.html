@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sats calculator · SatsStart</title><meta name="description" content="Fix your finances first, then stack small amounts of Bitcoin. Educational tools for people in Spain and Europe."><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><nav><a class="logo" href="index.html">Sats<span>Start</span></a>
+<a href="finances-first.html" >Finances first</a>
+<a href="revolut-x-fees.html" >Fee calculator</a>
+<a href="sats-calculator.html" class="on">Sats calculator</a>
+<a href="disclaimer.html" >Disclaimer</a></nav></header>
+<main>
+<h1>Monthly sats calculator</h1><p>1 Bitcoin = 100,000,000 sats. Enter the BTC price yourself to see how many sats a monthly amount buys. This is arithmetic, not a forecast.</p>
+<div class="card"><label for="p">BTC price (€)</label><input id="p" type="number" min="1" placeholder="Enter current price, e.g. from Revolut X"><p class="note">We don't predict prices and don't fetch live ones in v1.</p>
+<label for="m">Months of saving</label><input id="m" type="number" min="1" max="600" value="12"></div>
+<div class="tblwrap"><table><thead><tr><th>Per month</th><th>Sats per month</th><th>Total sats</th><th>Total invested</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="note">Assumes the same price each month and ignores fees. Real results vary because the price changes. Bitcoin is volatile and you can lose money.</p>
+</main>
+<footer>Educational content only, not financial advice. Bitcoin is volatile and you can lose money. Some links may be affiliate links; see the <a href="disclaimer.html">disclaimer</a>. © 2026 SatsStart</footer>
+<script>const f=n=>Math.floor(n).toLocaleString("en-GB");
+const P=document.getElementById("p"),M=document.getElementById("m"),ROWS=document.getElementById("rows");
+function u(){const pr=+P.value,mo=Math.min(600,Math.max(0,Math.floor(+M.value||0)));ROWS.innerHTML=[10,25,50].map(a=>{const s=pr>0?a/pr*1e8:null;
+return `<tr><td>€${a}</td><td>${s==null?"–":f(s)}</td><td>${s==null?"–":f(Math.floor(s)*mo)}</td><td>€${(a*mo).toLocaleString("en-GB")}</td></tr>`}).join("")}
+P.addEventListener("input",u);M.addEventListener("input",u);u();</script>
+</body></html>
