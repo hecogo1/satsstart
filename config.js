@@ -13,7 +13,7 @@ window.FEES_LAST_CHECKED = "16 October 2026";
 window.LINKS = {
   revolut: "https://www.revolut.com/",
   revolutx: "https://www.revolut.com/revolut-x/",
-  bitbox: "https://bitbox.swiss/",
+  bitbox: "https://shop.bitbox.swiss/?ref=pgafgzst",
   trezor: "https://trezor.io/",
   tangem: "https://tangem.com/invite/4YEDCC",
   traderepublic: "https://traderepublic.com/"
